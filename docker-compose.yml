@@ -1,0 +1,16 @@
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fyle_assignment:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=development
+      - GUNICORN_PORT=8080
+    command: ["gunicorn", "-c", "gunicorn_config.py", "core.server:app"]
+
